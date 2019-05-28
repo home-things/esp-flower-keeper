@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "/Users/mxtnr/Documents/PlatformIO/Projects/190527-230312-d1_mini"
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.background": "#5D0E08",
+			"titleBar.activeBackground": "#82140B",
+			"titleBar.activeForeground": "#FFFCFC"
+		},
+		"terminal.integrated.env.osx": {
+			"PATH": "/Users/mxtnr/.platformio/penv/bin:/Users/mxtnr/.platformio/penv:/Users/mxtnr/dotfiles/bin:./node_modules/.bin/:/usr/local/opt/imagemagick@6/bin:/usr/local/Cellar/postgresql@9.6/9.6.10_1/bin:/Users/mxtnr/.rvm/bin:/Users/mxtnr/.rvm/gems/ruby-2.1.10/bin:/Users/mxtnr/.rvm/gems/ruby-2.1.10@global/bin:/Users/mxtnr/.rvm/rubies/ruby-2.1.10/bin:/Users/mxtnr/.zplug/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Wireshark.app/Contents/MacOS:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/mxtnr/.rvm/bin:/Users/mxtnr/n/bin:/Users/mxtnr/Library/Arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools:/Users/mxtnr/.platformio/penv/bin",
+			"PLATFORMIO_CALLER": "vscode"
+		}
+	}
+}

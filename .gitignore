@@ -1,0 +1,10 @@
+.git-
+.DS_Store
+.vscode/ipch
+.vscode/.*
+.vscode/c_cpp_properties.json
+
+.pio
+.pioenvs
+.piolibdeps
+!.piolibdeps/TFT_eSPI_ID1559/User_Setup.h
