@@ -10,6 +10,6 @@ String formatDigit(int i, int len)
 }
 String time_str(tm *t)
 {
-  return String(t->tm_mday) + "." + formatDigit(t->tm_mon, 2)
+  return String(t->tm_mday) + "." + formatDigit(t->tm_mon + 1, 2)
     + " " + formatDigit(t->tm_hour, 2) + ":" + formatDigit(t->tm_min, 2);
 }
