@@ -34,21 +34,20 @@ int prev_day = -1;
 #define GFXFF 1
 //#define FF18 &FreeSans12pt7b
 //#define CF_RT24 &Roboto_Thin_24
-#define OVERSCAN_Y -24
 
 TFT_eSPI tft = TFT_eSPI();  // Invoke library, pins defined in User_Setup.h
 
-const unsigned line_h = 24; // height, px
-unsigned text_y = OVERSCAN_Y + 12;
+const unsigned line_h = 16; // height, px
+unsigned text_y;
 //unsigned long startedAt = null; // s since 1970 aka epoch
 
 void start_text()
 {
-  text_y = OVERSCAN_Y + 8;
+  text_y = -16;
 }
 
 void center_text (String text, unsigned color) {
-  const unsigned font = 4;
+  const unsigned font = 2;
   tft.setTextColor(color, TFT_BLACK);
   // landscape mode
   tft.drawCentreString(text, TFT_HEIGHT / 2, text_y += line_h, font);
@@ -58,7 +57,7 @@ void center_text (String text, unsigned color) {
 void print_status (const String &text, unsigned color)
 {
   tft.setTextColor(color, TFT_BLACK);
-  tft.drawCentreString(text, TFT_HEIGHT / 2, TFT_WIDTH - 10, 1);
+  tft.drawRightString(text, TFT_HEIGHT - 2, TFT_WIDTH - 10, 1);
 }
 void print_status (const String &text)
 {
@@ -89,7 +88,7 @@ static uint8_t conv2d(const char* p) {
 }
 
 
-void setupWifi () {
+void setup_wifi () {
   WiFi.mode(WIFI_STA);
   WiFi.begin(conf.WIFI_SSID.c_str(), conf.WIFI_PASSW.c_str());
   // Serial.println("");
@@ -141,18 +140,26 @@ unsigned get_day (time_t ts)
 
 void render ()
 {
+  unsigned INTERVAL;
   const unsigned day = get_day(get_timestamp());
   if (day == prev_day) return;
 
   start_text();
   center_text("SUCULENTA", tft.color565(76, 175, 80)); // light green
   const unsigned OFFSET = -3; // 18044th day must be 0 (=water_please)
-  const unsigned INTERVAL = 3;
+  INTERVAL = 5;
   (day + OFFSET) % INTERVAL ? okay_now() : water_please();
 
 
-  margin(12);
+  margin(8);
   center_text("LEMON MINT", tft.color565(76, 175, 80)); // light green
+  INTERVAL = 2;
+  (day + OFFSET) % INTERVAL ? okay_now() : water_please();
+
+
+  margin(8);
+  center_text("THUJA", tft.color565(76, 175, 80)); // light green
+  INTERVAL = 3;
   (day + OFFSET) % INTERVAL ? okay_now() : water_please();
 
   prev_day = day;
@@ -242,27 +249,20 @@ void setup(void) {
   Serial.begin(115200);
 
   setup_time_rtc(); // quick
-  tft.setTextColor(TFT_DARKGREY, TFT_BLACK);
-  tft.drawRightString("rtc_t: ok", TFT_HEIGHT - 2, TFT_WIDTH - 10, 1);
+  print_status("rtc_t: ok", TFT_DARKGREY);
 
   display_setup();
-  // print_status("disp: ok");
-  tft.setTextColor(TFT_DARKGREY, TFT_BLACK);
-  tft.drawRightString("disp: ok", TFT_HEIGHT - 2, TFT_WIDTH - 10, 1);
+  print_status("disp: ok", TFT_DARKGREY);
 
-  setupWifi();
-  // print_status("wifi: ok");
-  tft.setTextColor(TFT_CYAN, TFT_BLACK);
-  tft.drawRightString("wifi: ok", TFT_HEIGHT - 2, TFT_WIDTH - 10, 1);
+  setup_wifi();
+  print_status("wifi: ok", TFT_CYAN);
 
   ota_setup();
-  // print_status("ota: ok");
-  tft.setTextColor(TFT_WHITE, TFT_BLACK);
-  tft.drawRightString("ota: ok ", TFT_HEIGHT - 2, TFT_WIDTH - 10, 1);
+  print_status(" ota: ok", TFT_WHITE);
 
   setup_time_ntp(); // slow
-  // print_status("time: ok");
-  tft.drawRightString("time: ok", TFT_HEIGHT - 2, TFT_WIDTH - 10, 1);
+  print_status("time: ok", TFT_WHITE);
+
   Serial.println("inited");
 }
 
@@ -275,6 +275,7 @@ void loop() {
   ota_loop();
 
   tm *t = get_time();
+
   // right bottom corner clock
   tft.setTextColor(TFT_GREENYELLOW, TFT_BLACK);
   // print_status(formatDigit(t->tm_hour, 2) + ":" + formatDigit(t->tm_min, 2));
