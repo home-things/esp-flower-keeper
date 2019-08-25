@@ -3,7 +3,7 @@
 .vscode/.*
 .vscode/c_cpp_properties.json
 
-.pio
 .pioenvs
-.piolibdeps
-!.piolibdeps/TFT_eSPI_ID1559/User_Setup.h
+.pio
+!.pio/**/
+!.pio/libdeps/esp01/TFT_eSPI_ID1559/User_Setup.h

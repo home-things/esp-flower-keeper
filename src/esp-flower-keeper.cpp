@@ -78,13 +78,13 @@ void okay_now()
   center_text("ok now", TFT_DARKGREY);
 }
 
-static uint8_t conv2d(const char *p)
-{
-  uint8_t v = 0;
-  if ('0' <= *p && *p <= '9')
-    v = *p - '0';
-  return 10 * v + *++p - '0';
-}
+// static uint8_t conv2d(const char *p)
+// {
+//   uint8_t v = 0;
+//   if ('0' <= *p && *p <= '9')
+//     v = *p - '0';
+//   return 10 * v + *++p - '0';
+// }
 
 void setup_wifi()
 {
@@ -141,7 +141,7 @@ unsigned get_day(time_t ts)
 void render()
 {
   unsigned INTERVAL;
-  const unsigned day = get_day(get_timestamp());
+  const long day = get_day(get_timestamp());
   if (day == prev_day)
     return;
 
@@ -152,8 +152,8 @@ void render()
   (day + OFFSET) % INTERVAL ? okay_now() : water_please();
 
   margin(8);
-  center_text("LEMON MINT", tft.color565(76, 175, 80)); // light green
-  INTERVAL = 2;
+  center_text("VIOLET", tft.color565(76, 175, 80)); // light green
+  INTERVAL = 1;
   (day + OFFSET) % INTERVAL ? okay_now() : water_please();
 
   margin(8);
